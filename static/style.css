@@ -1,0 +1,195 @@
+/* From Uiverse.io by ammarsaa */ 
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  color: #00bfff;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.title::before,
+.title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: #00bfff;
+}
+
+.message, 
+.signin {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.signin a {
+  color: #00bfff;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+/* Estilos para o campo de telefone com DDI */
+.form label.tel-label {
+  position: relative;
+}
+
+.form label.tel-label .ddi {
+  position: absolute;
+  left: 10px;
+  top: 12.5px; /* Alinhar verticalmente com o texto do input */
+  font-size: medium; /* Mesmo tamanho do input */
+  color: rgba(255, 255, 255, 0.7); /* Cor similar ao placeholder */
+  z-index: 1; /* Para ficar sobre o input se necessário, mas o padding deve evitar */
+  pointer-events: none; /* Para não interferir com o clique no input */
+}
+
+.form label.tel-label .input {
+  padding-left: 50px; /* Aumentar o padding para acomodar o DDI */
+}
+
+/* Ajuste para o span do label do telefone quando focado/válido */
+.form label.tel-label .input:focus + span,
+.form label.tel-label .input:valid + span {
+  /* O span do label já é tratado pelas regras gerais, 
+     mas se precisar de ajuste específico para o telefone, pode ser feito aqui.
+     Por exemplo, se o DDI causar desalinhamento do label. */
+}
+
+/* Ajuste para o span do label do telefone quando placeholder-shown */
+.form label.tel-label .input:placeholder-shown + span {
+    left: 50px; /* Ajusta a posição inicial do label "Telefone" */
+}
+
+/* Ajuste para o span do label do telefone quando focado/válido */
+.form label.tel-label .input:focus + span,
+.form label.tel-label .input:valid + span {
+  left: 50px; /* Mantém o label "Telefone" alinhado após o DDI */
+}
+
+.form label .input,
+.form label .textarea { /* Adicionado .textarea para aplicar estilos semelhantes */
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 05px 05px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+  box-sizing: border-box; /* Garante que padding não aumente a largura total */
+}
+
+.form label .input + span,
+.form label .textarea + span { /* Adicionado .textarea */
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span,
+.form label .textarea:placeholder-shown + span { /* Adicionado .textarea */
+  top: 12.5px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span,
+.form label .textarea:focus + span,
+.form label .textarea:valid + span { /* Adicionado .textarea */
+  color: #00bfff;
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.input, 
+.textarea { /* Adicionado .textarea */
+  font-size: medium;
+}
+
+/* Estilo específico para o textarea para garantir que o span do label funcione corretamente */
+.form label textarea.input + span {
+  top: 12.5px; /* Ajuste inicial para o span do textarea */
+}
+
+.form label textarea.input:focus + span,
+.form label textarea.input:valid + span {
+  top: 0px; /* Span sobe ao focar ou validar */
+}
+
+
+.submit {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #00bfff;
+}
+
+.submit:hover {
+  background-color: #00bfff96;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
