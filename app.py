@@ -1,11 +1,14 @@
 import os
-from flask import Flask, jsonify, request # Garantir que esta linha não tem indentação
-from flask_cors import CORS # Adicionado CORS
+from flask import Flask, jsonify, request, render_template # Adicionado render_template
+from flask_cors import CORS
 import requests
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Configurar pastas de templates e estáticos. Flask procura por 'templates' e 'static' por padrão.
+# Se os nomes das pastas fossem diferentes, você especificaria aqui:
+# app = Flask(__name__, template_folder='meus_templates', static_folder='meus_estaticos')
 app = Flask(__name__)
 CORS(app) # Habilita CORS para todas as rotas e origens por padrão
 
@@ -15,8 +18,7 @@ CHATWOOT_BASE_URL = os.getenv("CHATWOOT_BASE_URL", "https://chat.unifyerp.com.br
 
 @app.route('/')
 def index():
-    # Futuramente, pode servir o index.html daqui
-    return "Backend do Aplicativo de Mensagens Chatwoot está rodando!"
+    return render_template('index.html')
 
 # Endpoint para listar caixas de entrada
 @app.route('/api/inboxes', methods=['GET'])
