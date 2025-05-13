@@ -16,9 +16,10 @@ CHATWOOT_API_KEY = os.getenv("CHATWOOT_API_KEY")
 CHATWOOT_ACCOUNT_ID = os.getenv("CHATWOOT_ACCOUNT_ID")
 CHATWOOT_BASE_URL = os.getenv("CHATWOOT_BASE_URL", "https://chat.unifyerp.com.br")
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# A rota raiz '/' não é mais necessária aqui, será servida pelo Nginx (frontend)
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 # Endpoint para listar caixas de entrada
 @app.route('/api/inboxes', methods=['GET'])
