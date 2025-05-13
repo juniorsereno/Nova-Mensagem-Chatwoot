@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultOption.selected = true;
     inboxSelect.appendChild(defaultOption);
 
-    const backendUrl = 'http://127.0.0.1:5001'; // Definir a URL base do backend
+    // Use a relative URL to ensure it works both locally and when deployed
+    const backendUrl = ''; // Empty string means same domain as the frontend
 
     fetch(`${backendUrl}/api/inboxes`)
         .then(response => {
@@ -20,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(inboxes => {
             // Limpa a opção "Carregando..."
-            inboxSelect.innerHTML = ''; 
-            
+            inboxSelect.innerHTML = '';
+
             if (inboxes && inboxes.length > 0) {
                 const placeholderOption = document.createElement('option');
                 placeholderOption.value = "";
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Coletar dados do formulário
         const nomeCompletoInput = form.querySelector('label:not(.tel-label) input[type="text"].input');
         const nomeCompleto = nomeCompletoInput ? nomeCompletoInput.value : '';
-        
+
         const telefoneInput = form.querySelector('.tel-label input.input');
         const telefone = telefoneInput ? telefoneInput.value : '';
 
@@ -96,10 +97,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 return response.json().then(data => ({ status: response.status, ok: response.ok, body: data }));
             } else {
                 // Se não for JSON, trata como texto e cria um objeto de erro padronizado
-                return response.text().then(text => ({ 
-                    status: response.status, 
-                    ok: response.ok, 
-                    body: { error: `Resposta não JSON: ${text || 'Corpo vazio'}` } 
+                return response.text().then(text => ({
+                    status: response.status,
+                    ok: response.ok,
+                    body: { error: `Resposta não JSON: ${text || 'Corpo vazio'}` }
                 }));
             }
         })
