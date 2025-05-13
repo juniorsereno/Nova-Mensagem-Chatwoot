@@ -35,7 +35,7 @@ def get_inboxes():
             headers=headers
         )
         response.raise_for_status()  # Lança exceção para respostas de erro HTTP (4xx ou 5xx)
-        
+
         raw_response_data = response.json()
         print(f"Resposta crua da API Chatwoot para /inboxes: {raw_response_data}") # Log para depuração
         print(f"Tipo da resposta crua: {type(raw_response_data)}")
@@ -61,7 +61,7 @@ def get_inboxes():
             else:
                 print(f"Item inesperado na lista de inboxes (não é um dicionário): {inbox}")
                 # Pode optar por pular este item ou retornar um erro
-        
+
         return jsonify(simplified_inboxes)
 
     except requests.exceptions.HTTPError as e:
@@ -74,12 +74,12 @@ def get_inboxes():
         except ValueError: # Em caso de resposta não-JSON
             error_message += e.response.text
         return jsonify({"error": error_message}), e.response.status_code if e.response else 503
-        
+
     except requests.exceptions.RequestException as e:
         # Outros erros de requisição (conexão, timeout, etc.)
         print(f"Erro de requisição ao buscar inboxes do Chatwoot: {e}")
         return jsonify({"error": f"Erro de comunicação ao tentar buscar caixas de entrada: {str(e)}"}), 503
-        
+
     except Exception as e:
         # Outros erros inesperados (ex: erro de parsing do JSON se a resposta não for JSON válido)
         print(f"Erro inesperado ao processar inboxes: {e}")
@@ -114,7 +114,7 @@ def send_message():
     # Usaremos o telefone como identificador único para buscar ou criar o contato.
     # A API de busca de contatos é GET /api/v1/accounts/{account_id}/contacts/search?q={telefone}
     # Se não encontrado, criar com POST /api/v1/accounts/{account_id}/contacts
-    
+
     try:
         # Tentar buscar contato existente pelo telefone
         search_url = f"{CHATWOOT_BASE_URL}/api/v1/accounts/{CHATWOOT_ACCOUNT_ID}/contacts/search"
@@ -122,10 +122,10 @@ def send_message():
         search_response = requests.get(search_url, headers=headers, params=search_params)
         search_response.raise_for_status()
         search_results = search_response.json()
-        
+
         # A API de search retorna um objeto com uma chave 'payload' que é uma lista de contatos
         existing_contacts = search_results.get('payload', [])
-        
+
         if existing_contacts:
             # Usar o primeiro contato encontrado com o telefone
             # Idealmente, a API deveria permitir uma busca mais precisa ou ter um campo 'identifier' mais robusto
@@ -193,10 +193,10 @@ def send_message():
         response_conversation.raise_for_status()
         conversation_data = response_conversation.json()
         print(f"Conversa criada: {conversation_data}")
-        
+
         # A resposta de 'newConversation' é um objeto com id, account_id, inbox_id
         return jsonify({
-            "success": True, 
+            "success": True,
             "message": "Mensagem enviada e conversa iniciada com sucesso!",
             "contact_id": contact_id,
             "conversation_id": conversation_data.get("id")
@@ -210,4 +210,6 @@ def send_message():
         return jsonify({"error": "Erro interno no servidor (conversa)."}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001) # Rodar em uma porta diferente da padrão para evitar conflitos
+    # Use environment variables to determine debug mode, defaulting to False in production
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+    app.run(host='0.0.0.0', debug=debug_mode, port=5001) # Rodar em uma porta diferente da padrão para evitar conflitos
