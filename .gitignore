@@ -1,1 +1,19 @@
-# Environment variables\n.env\n*.env\nenv/\nvenv/\n.venv/\n\n# Python cache\n__pycache__/\n*.py[cod]\n*$py.class\n\n# IDE / Editor specific\n.vscode/\n.idea/\n*.swp\n*.swo\n\n# OS specific\n.DS_Store\nThumbs.db\n
+# Environment variables
+      .env
+      *.env
+      env/
+      venv/
+      .venv/
+      # Python cache
+      __pycache__/
+      *.py[cod]
+      *$py.class
+      # IDE / Editor specific
+      .vscode/
+      .idea/
+      *.swp
+      *.swo
+      # OS specific
+      .DS_Store
+      Thumbs.db
+      
