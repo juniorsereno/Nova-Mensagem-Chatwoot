@@ -9,13 +9,11 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultOption.selected = true;
     inboxSelect.appendChild(defaultOption);
 
-    // Como o Flask agora serve o frontend e o backend na mesma origem,
-    // podemos usar caminhos relativos para as chamadas de API.
-    // const backendUrl = 'http://127.0.0.1:5001'; // Não mais necessário se servido pela mesma origem
-    // Se precisar de uma URL base absoluta no futuro (ex: se o JS for servido de um CDN),
-    // ela poderia ser injetada no HTML pelo Flask/Jinja2 ou configurada globalmente.
+    // Definir a URL base absoluta do backend.
+    // Esta URL deve corresponder ao domínio configurado para o serviço de backend no Traefik/Easypanel.
+    const backendApiUrl = 'https://api.automation-deandhela-envia-mensagem.wtoi4m.easypanel.host'; 
 
-    fetch('/api/inboxes') // Caminho relativo
+    fetch(`${backendApiUrl}/api/inboxes`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro HTTP ${response.status} ao buscar caixas de entrada.`);
@@ -86,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
 
-        fetch('/api/send-message', { // Caminho relativo
+        fetch(`${backendApiUrl}/api/send-message`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
