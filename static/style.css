@@ -1,8 +1,21 @@
-/* From Uiverse.io by ammarsaa */ 
+/* From Uiverse.io by ammarsaa - Modified for centering */
+/* Add styles for the body to make the background black */
+body {
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 100%;
   max-width: 350px;
   padding: 20px;
   border-radius: 20px;
@@ -10,7 +23,7 @@
   background-color: #1a1a1a;
   color: #fff;
   border: 1px solid #333;
-  font-family: Arial, Helvetica, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .title {
@@ -46,7 +59,7 @@
   background-color: #00bfff;
 }
 
-.message, 
+.message,
 .signin {
   font-size: 14.5px;
   color: rgba(255, 255, 255, 0.7);
@@ -96,7 +109,7 @@
 /* Ajuste para o span do label do telefone quando focado/válido */
 .form label.tel-label .input:focus + span,
 .form label.tel-label .input:valid + span {
-  /* O span do label já é tratado pelas regras gerais, 
+  /* O span do label já é tratado pelas regras gerais,
      mas se precisar de ajuste específico para o telefone, pode ser feito aqui.
      Por exemplo, se o DDI causar desalinhamento do label. */
 }
@@ -151,7 +164,7 @@
   font-weight: 600;
 }
 
-.input, 
+.input,
 .textarea { /* Adicionado .textarea */
   font-size: medium;
 }
