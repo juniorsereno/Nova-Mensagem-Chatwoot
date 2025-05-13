@@ -1,0 +1,20 @@
+# Usar uma imagem Nginx oficial como imagem base
+FROM nginx:alpine
+
+# Remover a configuração padrão do Nginx
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copiar uma configuração customizada do Nginx (opcional, mas bom para controle)
+# Se não fornecermos uma, o Nginx usará seus defaults para servir de /usr/share/nginx/html
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copiar os arquivos do frontend para o diretório raiz do Nginx
+# Assumindo que index.html está em templates/ e os assets em static/
+COPY ./templates/index.html /usr/share/nginx/html/index.html
+COPY ./static /usr/share/nginx/html/static/
+
+# Expor a porta 80 (padrão do Nginx)
+EXPOSE 80
+
+# Comando para iniciar o Nginx
+CMD ["nginx", "-g", "daemon off;"]
