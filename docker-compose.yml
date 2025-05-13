@@ -1,0 +1,21 @@
+version: "3.9"
+name: "nova-mensagem-chatwoot"
+
+services:
+  app:
+    build: .
+    environment:
+      # Estas variáveis devem ser configuradas na interface do Easypanel.
+      # O app.py usará os.getenv() para lê-las.
+      # CHATWOOT_API_KEY: ${CHATWOOT_API_KEY} # Exemplo de placeholder, não necessário aqui
+      # CHATWOOT_ACCOUNT_ID: ${CHATWOOT_ACCOUNT_ID}
+      # CHATWOOT_BASE_URL: ${CHATWOOT_BASE_URL}
+      
+      # FLASK_APP, FLASK_RUN_HOST, FLASK_RUN_PORT são definidos no Dockerfile.
+      # Se precisarem ser sobrescritos ou garantidos aqui:
+      # FLASK_APP: app.py
+      # FLASK_RUN_HOST: 0.0.0.0
+      # FLASK_RUN_PORT: 5001 
+      
+      PYTHONUNBUFFERED: "1" # Garante que os logs do Python apareçam imediatamente. Aspas para consistência YAML.
+    restart: unless-stopped
