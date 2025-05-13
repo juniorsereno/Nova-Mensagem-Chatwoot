@@ -19,3 +19,10 @@ services:
       
       PYTHONUNBUFFERED: "1" # Garante que os logs do Python apareçam imediatamente. Aspas para consistência YAML.
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chatwoot_sender.rule=Host(`automation-deandhela-envia-mensagem.wtoi4m.easypanel.host`)"
+      - "traefik.http.routers.chatwoot_sender.entrypoints=websecure"
+      - "traefik.http.routers.chatwoot_sender.tls.certresolver=letsencryptresolver" # Verifique se 'letsencryptresolver' é o nome correto no seu Easypanel
+      - "traefik.http.services.chatwoot_sender_service.loadbalancer.server.port=5001"
+      - "traefik.http.routers.chatwoot_sender.service=chatwoot_sender_service"
