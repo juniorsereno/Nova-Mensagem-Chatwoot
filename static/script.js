@@ -9,9 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultOption.selected = true;
     inboxSelect.appendChild(defaultOption);
 
-    const backendUrl = 'http://127.0.0.1:5001'; // Definir a URL base do backend
+    // Como o Flask agora serve o frontend e o backend na mesma origem,
+    // podemos usar caminhos relativos para as chamadas de API.
+    // const backendUrl = 'http://127.0.0.1:5001'; // Não mais necessário se servido pela mesma origem
+    // Se precisar de uma URL base absoluta no futuro (ex: se o JS for servido de um CDN),
+    // ela poderia ser injetada no HTML pelo Flask/Jinja2 ou configurada globalmente.
 
-    fetch(`${backendUrl}/api/inboxes`)
+    fetch('/api/inboxes') // Caminho relativo
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro HTTP ${response.status} ao buscar caixas de entrada.`);
@@ -82,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.textContent = 'Enviando...';
         submitButton.disabled = true;
 
-        fetch(`${backendUrl}/api/send-message`, {
+        fetch('/api/send-message', { // Caminho relativo
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
