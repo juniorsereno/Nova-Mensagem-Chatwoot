@@ -59,14 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão do formulário
         // Coletar dados do formulário
-        const nomeCompletoInput = form.querySelector('label:not(.tel-label) input[type="text"].input');
+        const nomeCompletoInput = document.getElementById('nome_completo');
         const nomeCompleto = nomeCompletoInput ? nomeCompletoInput.value : '';
 
-        const telefoneInput = form.querySelector('.tel-label input.input');
+        const telefoneInput = document.getElementById('telefone');
         const telefone = telefoneInput ? telefoneInput.value : '';
 
         const inboxId = inboxSelect.value;
-        const mensagemTextarea = form.querySelector('textarea.input');
+        const mensagemTextarea = document.getElementById('mensagem');
         const mensagem = mensagemTextarea ? mensagemTextarea.value : '';
 
         if (!inboxId) {

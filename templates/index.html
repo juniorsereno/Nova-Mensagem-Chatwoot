@@ -8,31 +8,35 @@
 </head>
 <body>
     <form class="form">
-        <p class="title">Enviar Mensagem</p>
+        <h1 class="title">Enviar Mensagem</h1>
         <p class="message">Preencha os campos abaixo para enviar sua mensagem.</p>
-        <label>
-            <input class="input" type="text" placeholder="" required="">
-            <span>Nome Completo</span>
-        </label>
-                
-        <label class="tel-label">
-            <span class="ddi">+55</span>
-            <input class="input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="" required="">
-            <span>Telefone</span>
-        </label> 
-        
-        <label>
-            <select class="input" id="inbox_id_select" required="">
+
+        <div class="form-group">
+            <label for="nome_completo">Nome Completo</label>
+            <input id="nome_completo" class="input" type="text" placeholder="Digite seu nome completo" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <div class="tel-label">
+                <span class="ddi">+55</span>
+                <input id="telefone" class="input" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="Digite seu telefone" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inbox_id_select">Caixa de Entrada</label>
+            <select id="inbox_id_select" required>
                 <!-- Opções serão populadas pelo JavaScript -->
             </select>
-            <span>Caixa de Entrada</span>
-        </label>
-            
-        <label>
-            <textarea class="input" placeholder="" required="" rows="4"></textarea>
-            <span>Mensagem</span>
-        </label>
-        <button class="submit">Enviar</button>
+        </div>
+
+        <div class="form-group">
+            <label for="mensagem">Mensagem</label>
+            <textarea id="mensagem" placeholder="Digite sua mensagem" required rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="submit">Enviar</button>
     </form>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
